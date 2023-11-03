@@ -5,13 +5,14 @@ import List from "./List";
 const Todo = () => {
   const [todoInput, settodoInput] = useState("");
   const [searchInput, setsearchInput] = useState("");
-  const [todos, settodos] = useState([])
+  const [todos, setTodos] = useState([]);
+
   const submitHandler = () => {
     if (todoInput == "") {
       alert("Fill First")
     }
     else {
-      settodos([...todos, todoInput])
+      setTodos([...todos, todoInput])
       settodoInput("")
     }
   }

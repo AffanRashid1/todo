@@ -1,11 +1,14 @@
-import React from 'react'
+import React, { useState } from 'react'
 
-const List = ({ todos }) => {
+const List = (props) => {
+    const [checkbox, setCheckbox] = useState(false)
+
     return (
         <>
-            {todos.map((elem) => {
+            {props.todos.map((elem) => {
                 return <li>
                     {elem}
+                    <input type="checkbox" onChange={(e) => {setCheckbox(!checkbox)}}/>
                 </li>
 
             })}
