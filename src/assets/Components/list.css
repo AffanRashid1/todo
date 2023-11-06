@@ -12,7 +12,7 @@
     font-size: 19px;
 }
 
-.todo-li .icons-box{
+.todo-li .icons-box {
     display: flex;
     gap: 10px;
 }
