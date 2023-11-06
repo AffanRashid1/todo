@@ -19,8 +19,6 @@ const Todo = () => {
   const [isLoading, setisLoading] = useState(true);
 
 
-
-  
   const submitHandler = async () => {
     if (todoInput == "") {
       toast.error("Must Fill The Field");
@@ -65,30 +63,32 @@ const Todo = () => {
             onChange={(e) => { setsearchInput(e.target.value) }}
             value={searchInput}
             placeholder="Search Todo"
-            color="success"
+            color="primary"
             focused
-
           />
 
           <TextField id="filled-basic" label="Add Todo" variant="outlined" onChange={(e) => { settodoInput(e.target.value) }}
             value={todoInput}
             placeholder="Write Todo Here"
-            color="success"
+            color="primary"
             className="textfield"
             focused
             name="todo"
+            autoFocus
             onKeyPress={(e) => {
               if (e.key === 'Enter') {
                 submitHandler();
               }
             }} />
+
           <Button variant="contained" onClick={submitHandler} color="primary">Add Todo</Button>
+
 
           <div style={{ display: "grid", placeItems: "center" }}>
             <Bars
               height="80"
               width="80"
-              color="#E65100"
+              color="#1565C0 "
               ariaLabel="bars-loading"
               wrapperStyle={{}}
               wrapperClass=""
@@ -96,7 +96,7 @@ const Todo = () => {
             />
           </div>
           <ul>
-            <List todos={todos} getData={getData} />
+            <List todos={todos} getData={getData} settodoInput={settodoInput} todoInput={todoInput}/>
           </ul>
         </Box>
       </Container>
@@ -110,7 +110,7 @@ const Todo = () => {
         pauseOnFocusLoss
         draggable
         pauseOnHover
-        theme="light"
+        theme="dark"
       />
     </>
   )

@@ -1,11 +1,9 @@
 .todo-li {
     list-style: none;
-    /* background-color: #E65100; */
-    background-color: #ff9100;
-    /* background-color: #388e3c; */
+    background-color: #95c1f3;
     padding: 10px;
     border-radius: 6px;
-    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    box-shadow: rgba(0, 0, 0, 0.5) 0px 3px 8px;
     margin-bottom: 10px;
     display: flex;
     justify-content: space-between;
@@ -16,4 +14,5 @@
 .todo-li .icons-box {
     display: flex;
     gap: 10px;
+    align-items: center;
 }
