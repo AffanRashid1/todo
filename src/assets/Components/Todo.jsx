@@ -16,11 +16,14 @@ const Todo = () => {
   const [todoInput, settodoInput] = useState("");
   const [searchInput, setsearchInput] = useState("");
   const [todos, setTodos] = useState([]);
-  const [isLoading, setisLoading] = useState(true)
+  const [isLoading, setisLoading] = useState(true);
 
+
+
+  
   const submitHandler = async () => {
     if (todoInput == "") {
-      alert("Fill First")
+      toast.error("Must Fill The Field");
     }
     else {
       await axios.post("https://43a0-2400-adc1-16b-5100-e1ef-ee90-3f97-5e04.ngrok-free.app/todos/add", {
@@ -35,12 +38,14 @@ const Todo = () => {
   }
 
   const getData = async () => {
+
     let response = await axios.get("https://43a0-2400-adc1-16b-5100-e1ef-ee90-3f97-5e04.ngrok-free.app/todos", {
       headers: {
         "Content-Type": "application/json",
         "ngrok-skip-browser-warning": true,
       }
     });
+
     setTodos(response?.data?.Todos)
     setisLoading(false)
   }
@@ -48,7 +53,6 @@ const Todo = () => {
   useEffect(() => {
     getData()
   }, [])
-
 
 
   return (
@@ -61,7 +65,7 @@ const Todo = () => {
             onChange={(e) => { setsearchInput(e.target.value) }}
             value={searchInput}
             placeholder="Search Todo"
-            color="warning"
+            color="success"
             focused
 
           />
@@ -69,7 +73,7 @@ const Todo = () => {
           <TextField id="filled-basic" label="Add Todo" variant="outlined" onChange={(e) => { settodoInput(e.target.value) }}
             value={todoInput}
             placeholder="Write Todo Here"
-            color="warning"
+            color="success"
             className="textfield"
             focused
             name="todo"
@@ -78,7 +82,7 @@ const Todo = () => {
                 submitHandler();
               }
             }} />
-          <Button variant="contained" onClick={submitHandler} color="warning">Add Todo</Button>
+          <Button variant="contained" onClick={submitHandler} color="primary">Add Todo</Button>
 
           <div style={{ display: "grid", placeItems: "center" }}>
             <Bars
