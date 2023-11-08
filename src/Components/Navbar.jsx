@@ -3,14 +3,9 @@ import { Box, Typography } from "@mui/material";
 import { Link } from "react-router-dom";
 import Button from "@mui/material/Button";
 import styled from "styled-components";
+import StickyNote2Icon from "@mui/icons-material/StickyNote2";
 
 const Navbar = () => {
-  const linkStyle = {
-    textDecoration: "none",
-    margin: "10px",
-    fontSize: "18px",
-    color: "#1565C0",
-  };
   return (
     <>
       <Box
@@ -20,7 +15,7 @@ const Navbar = () => {
           justifyContent: "space-between",
           padding: "20px 50px",
           background: "transparent",
-          flexWrap: "wrap"
+          flexWrap: "wrap",
         }}
       >
         <Box>
@@ -32,7 +27,8 @@ const Navbar = () => {
               letterSpacing: 4,
             }}
           >
-            TODO
+            <StickyNote2Icon sx={{ margin: "0 7px" }} />
+            todo
           </Typography>
         </Box>
         <Box
@@ -43,22 +39,21 @@ const Navbar = () => {
             userSelect: "none",
           }}
         >
-          <Typography>
-            <Link to="/" style={linkStyle}>
-              Home
-            </Link>
-          </Typography>
-          <Typography>
-            <Link to="/todos" style={linkStyle}>
-              Todos
-            </Link>
-          </Typography>
-
           <Button variant="contained" size="medium">
-            SignUp
+            <Link
+              to="/register"
+              style={{ textDecoration: "none", color: "white" }}
+            >
+              Sign Up
+            </Link>
           </Button>
           <Button variant="contained" size="medium">
-            Login
+            <Link
+              to="/login"
+              style={{ textDecoration: "none", color: "white" }}
+            >
+              Login
+            </Link>
           </Button>
         </Box>
       </Box>

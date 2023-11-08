@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import React from "react";
-import List from "./List";
+import List from "../Components/List";
 import axios from "axios";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
@@ -15,7 +15,7 @@ const baseUrl = "https://abdd-103-156-136-175.ngrok-free.app/todos";
 
 const Todo = () => {
   const [todoInput, settodoInput] = useState("");
-  const [searchInput, setsearchInput] = useState("");
+  // const [searchInput, setsearchInput] = useState("");
   const [todos, setTodos] = useState([]);
   const [isLoading, setisLoading] = useState(true);
 
