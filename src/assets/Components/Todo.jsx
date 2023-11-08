@@ -10,7 +10,6 @@ import "../Components/list.css";
 import { Bars } from "react-loader-spinner";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import "../Components/todo.css";
 
 const baseUrl = "https://abdd-103-156-136-175.ngrok-free.app/todos";
 

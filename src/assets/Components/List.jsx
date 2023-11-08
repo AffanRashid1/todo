@@ -22,10 +22,10 @@ const List = (props) => {
   };
 
   const editHandler = (todo, i) => {
-    setisEdit(true)
+    setisEdit(true);
     const mofifyData = props.todos.map((each) => {
       if (each._id === todo._id) {
-        seteditInput(each.todo)                          
+        seteditInput(each.todo);
         if (each.isEdit) {
           return { ...each, isEdit: false };
         }
@@ -61,7 +61,6 @@ const List = (props) => {
       },
     });
     props.getData();
-    console.log(checkbox);
   };
 
   return (
@@ -103,7 +102,7 @@ const List = (props) => {
                     Update
                   </Button>
                   <IconButton onClick={() => editHandler(elem, i)}>
-                    <CloseIcon />{" "}
+                    <CloseIcon />
                   </IconButton>
                 </>
               )}
