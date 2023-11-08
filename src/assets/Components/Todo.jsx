@@ -12,8 +12,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "../Components/todo.css";
 
-const baseUrl =
-  "https://7058-2400-adc1-16b-5100-3ccf-8e46-60e9-a328.ngrok-free.app/todos";
+const baseUrl = "https://abdd-103-156-136-175.ngrok-free.app/todos";
 
 const Todo = () => {
   const [todoInput, settodoInput] = useState("");

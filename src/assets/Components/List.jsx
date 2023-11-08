@@ -13,7 +13,7 @@ const List = (props) => {
   const [checkbox, setCheckbox] = useState(false);
   const [showbtn, setshowbtn] = useState("none");
   const [editInput, seteditInput] = useState("");
-  const [edit, setedit] = useState(false);
+  const [isEdit, setisEdit] = useState(false);
 
   const delApi = async (id) => {
     await axios.delete(`${props.baseUrl}/remove/${id}`);
@@ -22,8 +22,10 @@ const List = (props) => {
   };
 
   const editHandler = (todo, i) => {
+    setisEdit(true)
     const mofifyData = props.todos.map((each) => {
       if (each._id === todo._id) {
+        seteditInput(each.todo)                          
         if (each.isEdit) {
           return { ...each, isEdit: false };
         }
@@ -69,7 +71,7 @@ const List = (props) => {
           <li key={elem._id} className="todo-li">
             {elem?.isEdit ? (
               <Input
-                value={elem.todo}
+                value={isEdit ? editInput : elem.todo}
                 onChange={(e) => {
                   seteditInput(e.target.value);
                 }}
@@ -92,9 +94,18 @@ const List = (props) => {
                   <EditIcon />
                 </IconButton>
               ) : (
-                <IconButton onClick={() => editHandler(elem, i)}>
-                  <CloseIcon />{" "}
-                </IconButton>
+                <>
+                  <Button
+                    onClick={() => {
+                      putReqHandler(elem._id, elem.todo);
+                    }}
+                  >
+                    Update
+                  </Button>
+                  <IconButton onClick={() => editHandler(elem, i)}>
+                    <CloseIcon />{" "}
+                  </IconButton>
+                </>
               )}
             </div>
           </li>
