@@ -13,7 +13,7 @@ const Navbar = () => {
           width: 1,
           display: "flex",
           justifyContent: "space-between",
-          padding: "20px 50px",
+          padding: "20px 0px",
           background: "transparent",
           flexWrap: "wrap",
         }}
@@ -39,22 +39,19 @@ const Navbar = () => {
             userSelect: "none",
           }}
         >
-          <Button variant="contained" size="medium">
-            <Link
-              to="/register"
-              style={{ textDecoration: "none", color: "white" }}
-            >
+          <Link
+            to="/register"
+            style={{ textDecoration: "none", color: "white" }}
+          >
+            <Button variant="contained" size="medium">
               Sign Up
-            </Link>
-          </Button>
-          <Button variant="contained" size="medium">
-            <Link
-              to="/login"
-              style={{ textDecoration: "none", color: "white" }}
-            >
+            </Button>
+          </Link>
+          <Link to="/login" style={{ textDecoration: "none", color: "white" }}>
+            <Button variant="contained" size="medium">
               Login
-            </Link>
-          </Button>
+            </Button>
+          </Link>
         </Box>
       </Box>
     </>

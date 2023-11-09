@@ -10,8 +10,10 @@ import "../Components/list.css";
 import { Bars } from "react-loader-spinner";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { Link } from "react-router-dom";
+import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 
-const baseUrl = "https://abdd-103-156-136-175.ngrok-free.app/todos";
+const baseUrl = "https://5bee-202-47-34-141.ngrok-free.app/todos";
 
 const Todo = () => {
   const [todoInput, settodoInput] = useState("");
@@ -33,15 +35,19 @@ const Todo = () => {
   };
 
   const getData = async () => {
-    let response = await axios.get(baseUrl, {
-      headers: {
-        "Content-Type": "application/json",
-        "ngrok-skip-browser-warning": true,
-      },
-    });
+    try {
+      let response = await axios.get(baseUrl, {
+        headers: {
+          "Content-Type": "application/json",
+          "ngrok-skip-browser-warning": true,
+        },
+      });
 
-    setTodos(response?.data?.Todos);
-    setisLoading(false);
+      setTodos(response?.data?.Todos);
+      setisLoading(false);
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   useEffect(() => {
@@ -50,6 +56,9 @@ const Todo = () => {
 
   return (
     <>
+      <Link to="/">
+        <ArrowBackIosNewIcon sx={{ position: "absolute", top: 30, left: 20 }} />
+      </Link>
       <Container
         maxWidth="100vw"
         sx={{

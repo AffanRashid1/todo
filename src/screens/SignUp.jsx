@@ -30,7 +30,7 @@ const SignUp = () => {
     } else {
       try {
         let resp = await axios.post(
-          "https://abdd-103-156-136-175.ngrok-free.app/users/register",
+          "https://5bee-202-47-34-141.ngrok-free.app/users/register",
           {
             name: formDetails.name,
             email: formDetails.email,

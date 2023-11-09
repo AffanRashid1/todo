@@ -49,9 +49,11 @@ const Home = () => {
             Become focused, organized and calm with todo app. <br /> The World
             #1 Task Manager App
           </Typography>
-          <Button variant="contained" size="large">
-            <Link to="/todos" style={{color: "white", textDecoration: "none"}}>Make Todo List</Link>
-          </Button>
+          <Link to="/todos" style={{ color: "white", textDecoration: "none" }}>
+            <Button variant="contained" size="large">
+              Make Todo List
+            </Button>
+          </Link>
         </Box>
       </Container>
     </>
