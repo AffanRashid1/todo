@@ -6,7 +6,12 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Link } from "react-router-dom";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
+import { useNavigate } from "react-router-dom";
+import Cookies from "js-cookie";
+
 const Login = () => {
+  const navigate = useNavigate();
+
   const [loginInput, setloginInput] = useState({
     email: "",
     password: "",
@@ -32,11 +37,15 @@ const Login = () => {
             withCredentials: true,
           }
         );
-        toast.success(resp?.data?.message);
+        if (resp?.data?.sucess === true) {
+          console.log(Cookies.get("token"));
+          navigate("/");
+        }
         setloginInput({
           email: "",
           password: "",
         });
+        toast.success(resp?.data?.message);
       } catch (err) {
         toast.error(err?.response?.data?.message);
       }

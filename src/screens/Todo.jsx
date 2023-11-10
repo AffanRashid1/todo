@@ -55,7 +55,8 @@ const Todo = () => {
       setTodos(response?.data?.Todos);
       setisLoading(false);
     } catch (err) {
-      console.log(err);
+      setisLoading(false)
+      toast.error(err?.response?.data?.message);
     }
   };
 

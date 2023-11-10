@@ -30,7 +30,7 @@ const Home = () => {
             sx={{
               fontFamily: "Monospace",
               textAlign: "center",
-              fontSize: "4.5rem",
+              fontSize: "3.5rem",
               fontWeight: "bold",
               userSelect: "none",
             }}

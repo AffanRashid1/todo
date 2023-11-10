@@ -34,7 +34,6 @@ const List = (props) => {
       }
       return each;
     });
-    console.log(mofifyData);
     props.setTododData(mofifyData);
   };
 
@@ -54,6 +53,7 @@ const List = (props) => {
   };
 
   const doneHandler = async (id) => {
+    axios.defaults.withCredentials = true;
     const response = await axios({
       method: "PUT",
       url: `${props.baseUrl}/update`,

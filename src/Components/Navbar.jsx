@@ -4,8 +4,16 @@ import { Link } from "react-router-dom";
 import Button from "@mui/material/Button";
 import styled from "styled-components";
 import StickyNote2Icon from "@mui/icons-material/StickyNote2";
+import Cookies from "js-cookie";
+import { toast } from "react-toastify";
 
 const Navbar = () => {
+  const handleLogout = () => {
+    console.log("done");
+    toast.success("Logout Successfully");
+    Cookies.remove("token");
+  };
+
   return (
     <>
       <Box
@@ -52,6 +60,9 @@ const Navbar = () => {
               Login
             </Button>
           </Link>
+          {/* <Button variant="contained" size="medium" onClick={handleLogout}>
+            Logout
+          </Button> */}
         </Box>
       </Box>
     </>
