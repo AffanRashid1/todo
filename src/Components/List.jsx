@@ -16,6 +16,7 @@ const List = (props) => {
   const [isEdit, setisEdit] = useState(false);
 
   const delApi = async (id) => {
+    axios.defaults.withCredentials = true;
     await axios.delete(`${props.baseUrl}/remove/${id}`);
     await props.getData();
     toast.error("Deleted Successfully");
@@ -38,6 +39,7 @@ const List = (props) => {
   };
 
   const putReqHandler = async (id, todo) => {
+    axios.defaults.withCredentials = true;
     const response = await axios({
       method: "PUT",
       url: `${props.baseUrl}/update`,

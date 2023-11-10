@@ -6,45 +6,39 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Link } from "react-router-dom";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
-
 const Login = () => {
   const [loginInput, setloginInput] = useState({
     email: "",
     password: "",
   });
-
   const handleInputChange = (e) => {
     setloginInput({
       ...loginInput,
       [e.target.name]: e.target.value,
     });
   };
-
   const handleLogin = async () => {
     if (loginInput.email == "" || loginInput.password == "") {
       toast.error("Must Fill the Field");
     } else {
       try {
         let resp = await axios.post(
-          "https://5bee-202-47-34-141.ngrok-free.app/users/login",
+          "http://localhost:5000/users/login",
           {
             email: loginInput.email,
             password: loginInput.password,
           },
           {
-            headers: {
-              withCredentials: true,
-            },
+            withCredentials: true,
           }
         );
-        toast.success(resp.data.message);
+        toast.success(resp?.data?.message);
         setloginInput({
-          name: "",
           email: "",
           password: "",
         });
       } catch (err) {
-        toast.error(err.response.data.message);
+        toast.error(err?.response?.data?.message);
       }
     }
   };
@@ -60,7 +54,6 @@ const Login = () => {
         <Link to="/">
           <ArrowBackIosNewIcon sx={{ position: "absolute", top: "30px" }} />
         </Link>
-
         <Box
           sx={{
             height: "100vh",
@@ -137,5 +130,4 @@ const Login = () => {
     </>
   );
 };
-
 export default Login;

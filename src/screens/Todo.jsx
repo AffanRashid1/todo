@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import React from "react";
 import List from "../Components/List";
 import axios from "axios";
 import TextField from "@mui/material/TextField";
@@ -13,7 +12,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { Link } from "react-router-dom";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 
-const baseUrl = "https://5bee-202-47-34-141.ngrok-free.app/todos";
+const baseUrl = "http://localhost:5000/todos";
 
 const Todo = () => {
   const [todoInput, settodoInput] = useState("");
@@ -25,12 +24,21 @@ const Todo = () => {
     if (todoInput == "") {
       toast.error("Must Fill The Field");
     } else {
-      await axios.post(`${baseUrl}/add`, {
-        todo: todoInput,
-      });
-      settodoInput("");
-      getData();
-      toast.success("Added Succesfully");
+      try {
+        axios.defaults.withCredentials = true;
+        await axios.post(`${baseUrl}/add`, {
+          headers: {
+            "Content-Type": "application/json",
+            "ngrok-skip-browser-warning": true,
+          },
+          todo: todoInput,
+        });
+        settodoInput("");
+        getData();
+        toast.success("Added Succesfully");
+      } catch (error) {
+        console.log(error);
+      }
     }
   };
 
@@ -41,6 +49,7 @@ const Todo = () => {
           "Content-Type": "application/json",
           "ngrok-skip-browser-warning": true,
         },
+        withCredentials: true,
       });
 
       setTodos(response?.data?.Todos);
@@ -60,11 +69,11 @@ const Todo = () => {
         <ArrowBackIosNewIcon sx={{ position: "absolute", top: 30, left: 20 }} />
       </Link>
       <Container
-        maxWidth="100vw"
+        maxWidth="100%"
         sx={{
           display: "flex",
           justifyContent: "center",
-          height: "100vh",
+          minHeight: "100vh",
           background:
             "linear-gradient(to top, rgba(255,248,248,1) 0%, rgba(201,209,219,1) 100%, rgba(0,0,0,1) 100%)",
         }}

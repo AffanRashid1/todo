@@ -29,14 +29,11 @@ const SignUp = () => {
       toast.error("Fill Form");
     } else {
       try {
-        let resp = await axios.post(
-          "https://5bee-202-47-34-141.ngrok-free.app/users/register",
-          {
-            name: formDetails.name,
-            email: formDetails.email,
-            password: formDetails.password,
-          }
-        );
+        let resp = await axios.post("http://localhost:5000/users/register", {
+          name: formDetails.name,
+          email: formDetails.email,
+          password: formDetails.password,
+        });
         toast.success(resp.data.message);
         setformDetails({
           name: "",
