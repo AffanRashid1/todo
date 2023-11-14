@@ -4,16 +4,14 @@ import { Link } from "react-router-dom";
 import Button from "@mui/material/Button";
 import styled from "styled-components";
 import StickyNote2Icon from "@mui/icons-material/StickyNote2";
-import Cookies from "js-cookie";
 import { toast } from "react-toastify";
+import axios from "axios";
 
-const Navbar = () => {
-  const handleLogout = () => {
-    console.log("done");
-    toast.success("Logout Successfully");
-    Cookies.remove("token");
+const Navbar = ({ successLogin }) => {
+  const logoutHandler = async () => {
+    await axios.get("http://localhost:5000/users/logout")
   };
-
+  
   return (
     <>
       <Box
@@ -47,22 +45,30 @@ const Navbar = () => {
             userSelect: "none",
           }}
         >
-          <Link
-            to="/register"
-            style={{ textDecoration: "none", color: "white" }}
-          >
-            <Button variant="contained" size="medium">
-              Sign Up
+          {successLogin ? (
+            <Button variant="contained" size="medium" onClick={logoutHandler}>
+              Logout
             </Button>
-          </Link>
-          <Link to="/login" style={{ textDecoration: "none", color: "white" }}>
-            <Button variant="contained" size="medium">
-              Login
-            </Button>
-          </Link>
-          {/* <Button variant="contained" size="medium" onClick={handleLogout}>
-            Logout
-          </Button> */}
+          ) : (
+            <>
+              <Link
+                to="/register"
+                style={{ textDecoration: "none", color: "white" }}
+              >
+                <Button variant="contained" size="medium">
+                  Sign Up
+                </Button>
+              </Link>
+              <Link
+                to="/login"
+                style={{ textDecoration: "none", color: "white" }}
+              >
+                <Button variant="contained" size="medium">
+                  Login
+                </Button>
+              </Link>
+            </>
+          )}
         </Box>
       </Box>
     </>

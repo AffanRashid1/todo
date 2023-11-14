@@ -7,7 +7,6 @@ import "react-toastify/dist/ReactToastify.css";
 import { Link } from "react-router-dom";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 import { useNavigate } from "react-router-dom";
-import Cookies from "js-cookie";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -37,10 +36,7 @@ const Login = () => {
             withCredentials: true,
           }
         );
-        if (resp?.data?.sucess === true) {
-          console.log(Cookies.get("token"));
-          navigate("/");
-        }
+        navigate("/");
         setloginInput({
           email: "",
           password: "",

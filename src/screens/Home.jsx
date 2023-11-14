@@ -1,11 +1,25 @@
-import React from "react";
-import Navbar from "../Components/navbar";
+import React, { useEffect, useState } from "react";
+import Navbar from "../Components/Navbar";
 import Container from "@mui/material/Container";
 import { Box, Typography } from "@mui/material";
 import Button from "@mui/material/Button";
 import { Link } from "react-router-dom";
+import axios from "axios";
 
 const Home = () => {
+  const [successLogin, setSuccessLogin] = useState(false);
+  const DataApi = async () => {
+    try {
+      axios.defaults.withCredentials = true;
+      let response = await axios.get("http://localhost:5000/users/user");
+      setSuccessLogin(response?.data?.success);
+    } catch (err) {
+      setSuccessLogin(err?.response?.data?.success);
+    }
+  };
+  useEffect(() => {
+    DataApi();
+  }, []);
   return (
     <>
       <Container
@@ -15,7 +29,7 @@ const Home = () => {
             "linear-gradient(to top, rgba(255,248,248,1) 0%, rgba(201,209,219,1) 100%, rgba(0,0,0,1) 100%)",
         }}
       >
-        <Navbar />
+        <Navbar successLogin={successLogin} />
         <Box
           sx={{
             display: "flex",
@@ -28,11 +42,22 @@ const Home = () => {
         >
           <Typography
             sx={{
-              fontFamily: "Monospace",
-              textAlign: "center",
-              fontSize: "3.5rem",
-              fontWeight: "bold",
-              userSelect: "none",
+              typography: {
+                sm: {
+                  fontFamily: "Monospace",
+                  textAlign: "center",
+                  fontSize: "4.5rem",
+                  fontWeight: "bold",
+                  userSelect: "none",
+                },
+                xs: {
+                  fontFamily: "Monospace",
+                  textAlign: "center",
+                  fontSize: "2.5rem",
+                  fontWeight: "bold",
+                  userSelect: "none",
+                },
+              },
             }}
           >
             Organize your <br />

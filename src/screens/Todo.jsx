@@ -9,16 +9,21 @@ import "../Components/list.css";
 import { Bars } from "react-loader-spinner";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 
-const baseUrl = "http://localhost:5000/todos";
+const baseUrl = `${import.meta.env.VITE_BASE_URL}/todos`;
 
 const Todo = () => {
   const [todoInput, settodoInput] = useState("");
   // const [searchInput, setsearchInput] = useState("");
   const [todos, setTodos] = useState([]);
   const [isLoading, setisLoading] = useState(true);
+  const Navigate = useNavigate();
+
+  // if (isLogged == false) {
+  //   Navigate("/login");
+  // }
 
   const submitHandler = async () => {
     if (todoInput == "") {
@@ -55,7 +60,7 @@ const Todo = () => {
       setTodos(response?.data?.Todos);
       setisLoading(false);
     } catch (err) {
-      setisLoading(false)
+      setisLoading(false);
       toast.error(err?.response?.data?.message);
     }
   };
