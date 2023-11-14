@@ -15,4 +15,4 @@ export const {
   setLogged,
 } = reducer.actions;
 
-export default reducer.reducer;
+export default reducer.reducer ;

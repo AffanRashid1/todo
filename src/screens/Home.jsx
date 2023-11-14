@@ -5,21 +5,9 @@ import { Box, Typography } from "@mui/material";
 import Button from "@mui/material/Button";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import { Bars } from "react-loader-spinner";
 
 const Home = () => {
-  const [successLogin, setSuccessLogin] = useState(false);
-  const DataApi = async () => {
-    try {
-      axios.defaults.withCredentials = true;
-      let response = await axios.get("http://localhost:5000/users/user");
-      setSuccessLogin(response?.data?.success);
-    } catch (err) {
-      setSuccessLogin(err?.response?.data?.success);
-    }
-  };
-  useEffect(() => {
-    DataApi();
-  }, []);
   return (
     <>
       <Container
@@ -29,7 +17,7 @@ const Home = () => {
             "linear-gradient(to top, rgba(255,248,248,1) 0%, rgba(201,209,219,1) 100%, rgba(0,0,0,1) 100%)",
         }}
       >
-        <Navbar successLogin={successLogin} />
+        <Navbar />
         <Box
           sx={{
             display: "flex",

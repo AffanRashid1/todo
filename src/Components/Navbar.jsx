@@ -6,12 +6,14 @@ import styled from "styled-components";
 import StickyNote2Icon from "@mui/icons-material/StickyNote2";
 import { toast } from "react-toastify";
 import axios from "axios";
+import { useSelector } from "react-redux";
 
-const Navbar = ({ successLogin }) => {
+const Navbar = () => {
+  const isLogged = useSelector((state) => state.appReducer.isLogged);
   const logoutHandler = async () => {
-    await axios.get("http://localhost:5000/users/logout")
+    await axios.get("http://localhost:5000/users/logout");
   };
-  
+
   return (
     <>
       <Box
@@ -45,7 +47,7 @@ const Navbar = ({ successLogin }) => {
             userSelect: "none",
           }}
         >
-          {successLogin ? (
+          {isLogged ? (
             <Button variant="contained" size="medium" onClick={logoutHandler}>
               Logout
             </Button>

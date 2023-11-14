@@ -19,11 +19,6 @@ const Todo = () => {
   // const [searchInput, setsearchInput] = useState("");
   const [todos, setTodos] = useState([]);
   const [isLoading, setisLoading] = useState(true);
-  const Navigate = useNavigate();
-
-  // if (isLogged == false) {
-  //   Navigate("/login");
-  // }
 
   const submitHandler = async () => {
     if (todoInput == "") {
@@ -131,7 +126,7 @@ const Todo = () => {
             <Bars
               height="80"
               width="80"
-              color="#1565C0 "
+              color="#1565C0"
               ariaLabel="bars-loading"
               wrapperStyle={{}}
               wrapperClass=""
