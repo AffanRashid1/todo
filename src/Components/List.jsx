@@ -74,7 +74,6 @@ const List = (props) => {
               <Input
                 sx={{
                   width: "50%",
-                  backgroundColor: "red",
                 }}
                 value={editInput}
                 onChange={(e) => {
@@ -87,7 +86,7 @@ const List = (props) => {
                 }}
               />
             ) : (
-              <Typography sx={{width: "75%"}}>{elem.todo}</Typography>
+              <Typography sx={{ width: "75%" }}>{elem.todo}</Typography>
             )}
             <div className="icons-box">
               <Checkbox

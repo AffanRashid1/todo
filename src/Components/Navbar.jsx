@@ -10,13 +10,13 @@ import { useSelector } from "react-redux";
 import LogoutIcon from "@mui/icons-material/Logout";
 
 const Navbar = () => {
+  const user = useSelector((state) => state.appReducer.user);
   const isLogged = useSelector((state) => state.appReducer.isLogged);
   const logoutHandler = async () => {
     let response = await axios.get("http://localhost:5000/users/logout");
     toast.success(response?.data?.message);
     window.location.reload(true);
   };
-
   return (
     <>
       <Box
@@ -57,7 +57,7 @@ const Navbar = () => {
                   sx={{ display: "flex", alignItems: "center", gap: "10px" }}
                 >
                   <img
-                    src="https://www.iprcenter.gov/image-repository/blank-profile-picture.png/@@images/image.png"
+                    src={user.profile_photo}
                     width={"30rem"}
                     style={{
                       borderRadius: "50%",
@@ -65,7 +65,7 @@ const Navbar = () => {
                     }}
                   />
                   <Typography fontWeight={500} fontSize={20}>
-                    Affan
+                    {user.name}
                   </Typography>
                 </Box>
               </Box>

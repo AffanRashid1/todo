@@ -3,19 +3,18 @@ export const reducer = createSlice({
   name: "appReducer",
   initialState: {
     isLogged: false,
-    user: null,
+    user: {},
   },
 
   reducers: {
     setLogged: (state) => {
       state.isLogged = true;
     },
-    setUser: (state, { payload }) => {
-      state.isLogged = true;
-      state.user = payload;
+    setUser(state, action) {
+      state.user = action.payload;
     },
   },
 });
-export const { setLogged } = reducer.actions;
+export const { setLogged, setUser } = reducer.actions;
 
 export default reducer.reducer;

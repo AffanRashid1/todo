@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import axios from "axios";
-import { setLogged } from "./store/reducer";
+import { setLogged, setUser } from "./store/reducer";
 import Loading from "./Components/Loading";
 import { routes } from "./router";
 import Home from "./screens/Home";
@@ -12,12 +12,13 @@ const App = () => {
   const dispatch = useDispatch();
   const [isLoading, setIsLoading] = useState(true);
   const isLogged = useSelector((state) => state.appReducer.isLogged);
+  const user = useSelector((state) => state.appReducer.user);
   const DataApi = async () => {
     try {
       axios.defaults.withCredentials = true;
       let response = await axios.get("http://localhost:5000/users/user");
       dispatch(setLogged());
-      // setUser(response?.data?.User);
+      dispatch(setUser(response?.data?.User));
       setTimeout(() => {
         setIsLoading(false);
       }, 1000);
