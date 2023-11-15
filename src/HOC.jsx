@@ -1,11 +1,18 @@
-import React, { useEffect, useState } from "react";
-import { Outlet, Route, Navigate } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { Navigate } from "react-router-dom";
 
-const HOC = () => {
-  const isLogged = useSelector((state) => state.appReducer.isLogged);
-
-  return <>{isLogged ? <Outlet /> : <Navigate to="/login" />}</>;
+const HOC = ({ childern, isLogged, isProtected }) => {
+  if (isProtected) {
+    if (isLogged) {
+      return childern;
+    }
+    return <Navigate to="/login" />;
+  }
+  if (!isProtected) {
+    if (isLogged) {
+      return <Navigate to="/" replace />;
+    }
+    return childern;
+  }
 };
 
 export default HOC;

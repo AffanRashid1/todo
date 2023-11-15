@@ -36,12 +36,13 @@ const Login = () => {
             withCredentials: true,
           }
         );
-        navigate("/");
         setloginInput({
           email: "",
           password: "",
         });
         toast.success(resp?.data?.message);
+        navigate("/");
+        window.location.reload(true)
       } catch (err) {
         toast.error(err?.response?.data?.message);
       }

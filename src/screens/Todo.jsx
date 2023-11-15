@@ -86,6 +86,7 @@ const Todo = () => {
             justifyContent: "center",
             width: "50%",
             gap: "20px",
+            margin: "100px 0",
           }}
         >
           {/* <TextField
@@ -98,7 +99,7 @@ const Todo = () => {
           /> */}
 
           <TextField
-            id="filled-basic"
+            // id="filled-basic"
             label="Add Todo"
             variant="outlined"
             onChange={(e) => {

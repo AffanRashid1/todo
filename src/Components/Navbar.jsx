@@ -1,17 +1,20 @@
-import React from "react";
+import React, { useState } from "react";
 import { Box, Typography } from "@mui/material";
 import { Link } from "react-router-dom";
 import Button from "@mui/material/Button";
 import styled from "styled-components";
 import StickyNote2Icon from "@mui/icons-material/StickyNote2";
-import { toast } from "react-toastify";
+import { toast, ToastContainer } from "react-toastify";
 import axios from "axios";
 import { useSelector } from "react-redux";
+import LogoutIcon from "@mui/icons-material/Logout";
 
 const Navbar = () => {
   const isLogged = useSelector((state) => state.appReducer.isLogged);
   const logoutHandler = async () => {
-    await axios.get("http://localhost:5000/users/logout");
+    let response = await axios.get("http://localhost:5000/users/logout");
+    toast.success(response?.data?.message);
+    window.location.reload(true);
   };
 
   return (
@@ -48,9 +51,32 @@ const Navbar = () => {
           }}
         >
           {isLogged ? (
-            <Button variant="contained" size="medium" onClick={logoutHandler}>
-              Logout
-            </Button>
+            <>
+              <Box>
+                <Box
+                  sx={{ display: "flex", alignItems: "center", gap: "10px" }}
+                >
+                  <img
+                    src="https://www.iprcenter.gov/image-repository/blank-profile-picture.png/@@images/image.png"
+                    width={"30rem"}
+                    style={{
+                      borderRadius: "50%",
+                      boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px",
+                    }}
+                  />
+                  <Typography fontWeight={500} fontSize={20}>
+                    Affan
+                  </Typography>
+                </Box>
+              </Box>
+              <Button
+                size="small"
+                onClick={logoutHandler}
+                sx={{ borderRadius: "20%" }}
+              >
+                <LogoutIcon />
+              </Button>
+            </>
           ) : (
             <>
               <Link
@@ -73,6 +99,18 @@ const Navbar = () => {
           )}
         </Box>
       </Box>
+      <ToastContainer
+        position="top-right"
+        autoClose={500}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="dark"
+      />
     </>
   );
 };

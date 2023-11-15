@@ -72,13 +72,22 @@ const List = (props) => {
           <li key={elem._id} className="todo-li">
             {elem?.isEdit ? (
               <Input
-                value={isEdit ? editInput : elem.todo}
+                sx={{
+                  width: "50%",
+                  backgroundColor: "red",
+                }}
+                value={editInput}
                 onChange={(e) => {
                   seteditInput(e.target.value);
                 }}
+                onKeyPress={(e) => {
+                  if (e.key === "Enter") {
+                    putReqHandler(elem._id, elem.todo);
+                  }
+                }}
               />
             ) : (
-              <Typography>{elem.todo}</Typography>
+              <Typography sx={{width: "75%"}}>{elem.todo}</Typography>
             )}
             <div className="icons-box">
               <Checkbox
@@ -89,7 +98,9 @@ const List = (props) => {
                 onClick={() => doneHandler(elem._id)}
                 checked={elem.done}
               />
-              <DeleteIcon onClick={() => delApi(elem._id)} />
+              <IconButton onClick={() => delApi(elem._id)}>
+                <DeleteIcon />
+              </IconButton>
               {!elem?.isEdit ? (
                 <IconButton onClick={() => editHandler(elem, i)}>
                   <EditIcon />
@@ -97,6 +108,7 @@ const List = (props) => {
               ) : (
                 <>
                   <Button
+                    variant="outlined"
                     onClick={() => {
                       putReqHandler(elem._id, elem.todo);
                     }}
