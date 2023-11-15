@@ -50,7 +50,7 @@ const Navbar = () => {
         <Box
           sx={{
             display: "flex",
-            gap: "20px",
+            gap: 2,
             alignItems: "center",
             userSelect: "none",
           }}
@@ -64,25 +64,29 @@ const Navbar = () => {
                     display: "flex",
                     alignItems: "center",
                     gap: "20px",
-                    padding: "7px 10px",
                     borderRadius: 1.8,
-                    boxShadow:
-                      "rgba(9, 30, 66, 0.25) 0px 1px 1px, rgba(9, 30, 66, 0.13) 0px 0px 1px 1px",
-                    bgcolor: "rgba(9, 30, 66, 0.25)"
+                    // boxShadow:
+                    //   "rgba(9, 30, 66, 0.25) 0px 1px 1px, rgba(9, 30, 66, 0.13) 0px 0px 1px 1px",
+                    // bgcolor: "rgba(9, 30, 66, 0.25)"
                   }}
                 >
                   <img
                     src={user.profile_photo}
-                    width={"40rem"}
+                    width={"50rem"}
+                    height={"50rem"}
                     style={{
                       borderRadius: "50%",
                       boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px",
+                      border: "2px solid #1565C0",
                     }}
                   />
                   <Typography
                     fontWeight={500}
                     fontSize={20}
                     textTransform={"uppercase"}
+                    sx={{
+                      color: "#1565C0",
+                    }}
                   >
                     {user.name}
                   </Typography>
@@ -130,13 +134,7 @@ const Navbar = () => {
         pauseOnHover
         theme="dark"
       />
-      <Modal
-        keepMounted
-        open={open}
-        onClose={() => setOpen(false)}
-        aria-labelledby="keep-mounted-modal-title"
-        aria-describedby="keep-mounted-modal-description"
-      >
+      <Modal keepMounted open={open} onClose={() => setOpen(false)}>
         <Box
           sx={{
             position: "absolute",
@@ -169,11 +167,14 @@ const Navbar = () => {
           <img
             src={user.profile_photo}
             alt="profile_img"
-            width={"100px"}
+            width={"200rem"}
+            height={"200rem"}
             style={{
               borderRadius: "50%",
+              border: "2px solid black",
               boxShadow:
                 "rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px",
+              marginTop: "10px",
             }}
           />
           <Typography
