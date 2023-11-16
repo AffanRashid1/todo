@@ -28,13 +28,10 @@ const Navbar = () => {
           state.isLogged = false;
         })
       );
-      console.log(isLogged);
     } catch (err) {
       console.log("🚀 ~ file: Navbar.jsx:26 ~ logoutHandler ~ err:", err);
     }
   };
-  console.log(isLogged);
-
   return (
     <>
       <Box

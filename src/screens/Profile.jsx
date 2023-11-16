@@ -2,9 +2,9 @@ import {
   Box,
   Button,
   Container,
-  TextField,
   Typography,
   ButtonGroup,
+  IconButton,
 } from "@mui/material";
 import { red } from "@mui/material/colors";
 import React from "react";
@@ -12,6 +12,7 @@ import { useSelector } from "react-redux";
 import CreatePost from "../Components/CreatePost";
 import { ToastContainer } from "react-toastify";
 import Post from "../Components/Post";
+import CameraIcon from "@mui/icons-material/Camera";
 
 const Profile = () => {
   const user = useSelector((state) => state.appReducer.user);
@@ -56,6 +57,7 @@ const Profile = () => {
             height={200}
             style={{ borderRadius: "50%", border: "5px solid #1565C0" }}
           />
+
           <Box>
             <Typography
               textTransform={"uppercase"}
@@ -126,7 +128,10 @@ const Profile = () => {
             <ButtonGroup variant="outlined" aria-label="outlined button group">
               <Button>Freinds</Button>
               <Button>Setting</Button>
-              <Button>Todos</Button>
+              <Button variant="outlined" component="label">
+                Upload Profile
+                <input type="file" accept="image/*" hidden />
+              </Button>{" "}
             </ButtonGroup>
           </Box>
         </Box>
@@ -149,16 +154,7 @@ const Profile = () => {
           <Typography fontFamily={"monospace"} fontSize={"30px"}>
             Posts
           </Typography>
-          {user.posts.map((e) => {
-            return (
-              <Post
-                post={e.caption}
-                profile={user.profile_photo}
-                time={user.createdAt}
-                name={user.name}
-              />
-            );
-          }).reverse()}
+          <Post />
         </Box>
         <ToastContainer
           position="top-right"
