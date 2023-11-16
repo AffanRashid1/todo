@@ -23,22 +23,22 @@ const Todo = () => {
   const submitHandler = async () => {
     if (todoInput == "") {
       toast.error("Must Fill The Field");
-    } else {
-      try {
-        axios.defaults.withCredentials = true;
-        await axios.post(`${baseUrl}/add`, {
-          headers: {
-            "Content-Type": "application/json",
-            "ngrok-skip-browser-warning": true,
-          },
-          todo: todoInput,
-        });
-        settodoInput("");
-        getData();
-        toast.success("Added Succesfully");
-      } catch (error) {
-        console.log(error);
-      }
+      return;
+    }
+    try {
+      axios.defaults.withCredentials = true;
+      await axios.post(`${baseUrl}/add`, {
+        headers: {
+          "Content-Type": "application/json",
+          "ngrok-skip-browser-warning": true,
+        },
+        todo: todoInput,
+      });
+      settodoInput("");
+      getData();
+      toast.success("Added Succesfully");
+    } catch (error) {
+      console.log(error);
     }
   };
 

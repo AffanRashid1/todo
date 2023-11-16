@@ -3,6 +3,7 @@ import Error from "./screens/Error";
 import Login from "./screens/Login";
 import Todo from "./screens/Todo";
 import SignUp from "./screens/SignUp";
+import Profile from "./screens/Profile";
 
 const routes = [
   {
@@ -18,6 +19,11 @@ const routes = [
   {
     path: "/todos",
     element: <Todo />,
+    protected: true,
+  },
+  {
+    path: "/profile",
+    element: <Profile/>,
     protected: true,
   },
 ];

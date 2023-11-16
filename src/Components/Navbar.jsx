@@ -9,18 +9,31 @@ import axios from "axios";
 import { useSelector } from "react-redux";
 import LogoutIcon from "@mui/icons-material/Logout";
 import CloseIcon from "@mui/icons-material/Close";
+import { useDispatch } from "react-redux";
+import { setLogged } from "../store/reducer";
 
 const Navbar = () => {
   const user = useSelector((state) => state.appReducer.user);
   console.log(user);
   const isLogged = useSelector((state) => state.appReducer.isLogged);
   const [open, setOpen] = useState(false);
+  const dispatch = useDispatch();
 
   const logoutHandler = async () => {
-    let response = await axios.get("http://localhost:5000/users/logout");
-    toast.success(response?.data?.message);
-    window.location.reload(true);
+    try {
+      let response = await axios.get("http://localhost:5000/users/logout");
+      toast.success(response?.data?.message);
+      dispatch(
+        setLogged((state) => {
+          state.isLogged = false;
+        })
+      );
+      console.log(isLogged);
+    } catch (err) {
+      console.log("🚀 ~ file: Navbar.jsx:26 ~ logoutHandler ~ err:", err);
+    }
   };
+  console.log(isLogged);
 
   return (
     <>
@@ -185,6 +198,9 @@ const Navbar = () => {
           >
             {user.name}
           </Typography>
+          <Link to="/profile" style={{ textDecoration: "none" }}>
+            Visit Profile
+          </Link>
           <Typography id="keep-mounted-modal-description" sx={{ mt: 2 }}>
             {user.email}
           </Typography>

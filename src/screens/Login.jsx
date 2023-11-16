@@ -7,8 +7,11 @@ import "react-toastify/dist/ReactToastify.css";
 import { Link } from "react-router-dom";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { setLogged, setUser } from "../store/reducer";
 
 const Login = () => {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const [loginInput, setloginInput] = useState({
@@ -40,9 +43,18 @@ const Login = () => {
           email: "",
           password: "",
         });
+        dispatch(
+          setLogged((state) => {
+            state.isLogged = true;
+          })
+        );
+        // dispatch(
+        //   setUser((state, action) => {
+        //     state.user = action.payload;
+        //   })
+        // );
         toast.success(resp?.data?.message);
         navigate("/");
-        window.location.reload(true)
       } catch (err) {
         toast.error(err?.response?.data?.message);
       }
