@@ -12,6 +12,7 @@ import { setLogged, setUser } from "../store/reducer";
 
 const Login = () => {
   const isLogged = useSelector((state) => state.appReducer.isLogged);
+  const user = useSelector((state) => state.appReducer.user);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -45,8 +46,7 @@ const Login = () => {
           password: "",
         });
         dispatch(setLogged());
-        dispatch(setUser(resp?.data?.User));
-        console.log(isLogged);
+        dispatch(setUser(resp?.data?.user));
 
         toast.success(resp?.data?.message);
         navigate("/");

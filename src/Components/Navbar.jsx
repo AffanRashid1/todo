@@ -10,11 +10,10 @@ import { useSelector } from "react-redux";
 import LogoutIcon from "@mui/icons-material/Logout";
 import CloseIcon from "@mui/icons-material/Close";
 import { useDispatch } from "react-redux";
-import { setLogged } from "../store/reducer";
+import { setInitialLogged } from "../store/reducer";
 
 const Navbar = () => {
   const user = useSelector((state) => state.appReducer.user);
-  console.log(user);
   const isLogged = useSelector((state) => state.appReducer.isLogged);
   const [open, setOpen] = useState(false);
   const dispatch = useDispatch();
@@ -23,11 +22,7 @@ const Navbar = () => {
     try {
       let response = await axios.get("http://localhost:5000/users/logout");
       toast.success(response?.data?.message);
-      dispatch(
-        setLogged((state) => {
-          state.isLogged = false;
-        })
-      );
+      dispatch(setInitialLogged());
     } catch (err) {
       console.log("🚀 ~ file: Navbar.jsx:26 ~ logoutHandler ~ err:", err);
     }
@@ -75,9 +70,6 @@ const Navbar = () => {
                     alignItems: "center",
                     gap: "20px",
                     borderRadius: 1.8,
-                    // boxShadow:
-                    //   "rgba(9, 30, 66, 0.25) 0px 1px 1px, rgba(9, 30, 66, 0.13) 0px 0px 1px 1px",
-                    // bgcolor: "rgba(9, 30, 66, 0.25)"
                   }}
                 >
                   <img

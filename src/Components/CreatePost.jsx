@@ -7,6 +7,7 @@ import SendIcon from "@mui/icons-material/Send";
 import CameraIcon from "@mui/icons-material/CameraAlt";
 import { ToastContainer, toast } from "react-toastify";
 import axios from "axios";
+
 const CreatePost = () => {
   const [postElem, setpostElem] = useState("");
   const baseUrl = `${import.meta.env.VITE_BASE_URL}`;
