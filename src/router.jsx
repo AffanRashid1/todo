@@ -4,6 +4,7 @@ import Login from "./screens/Login";
 import Todo from "./screens/Todo";
 import SignUp from "./screens/SignUp";
 import Profile from "./screens/Profile";
+import Search from "./screens/Search";
 
 const routes = [
   {
@@ -23,7 +24,12 @@ const routes = [
   },
   {
     path: "/profile",
-    element: <Profile/>,
+    element: <Profile />,
+    protected: true,
+  },
+  {
+    path: "/search",
+    element: <Search />,
     protected: true,
   },
 ];

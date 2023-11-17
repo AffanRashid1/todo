@@ -3,7 +3,7 @@ import List from "../Components/List";
 import axios from "axios";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
-import { Box } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import Container from "@mui/material/Container";
 import "../Components/list.css";
 import { Bars } from "react-loader-spinner";
@@ -89,17 +89,7 @@ const Todo = () => {
             margin: "100px 0",
           }}
         >
-          {/* <TextField
-            label="Search Todo"
-            onChange={(e) => { setsearchInput(e.target.value) }}
-            value={searchInput}
-            placeholder="Search Todo"
-            color="primary"
-            focused
-          /> */}
-
           <TextField
-            // id="filled-basic"
             label="Add Todo"
             variant="outlined"
             onChange={(e) => {
@@ -135,29 +125,21 @@ const Todo = () => {
             />
           </div>
           <ul>
-            <List
-              todos={todos}
-              getData={getData}
-              settodoInput={settodoInput}
-              todoInput={todoInput}
-              baseUrl={baseUrl}
-              setTododData={setTodos}
-            />
+            {todos.length == 0 ? (
+              <Typography textAlign={"center"}>No Task Available</Typography>
+            ) : (
+              <List
+                todos={todos}
+                getData={getData}
+                settodoInput={settodoInput}
+                todoInput={todoInput}
+                baseUrl={baseUrl}
+                setTododData={setTodos}
+              />
+            )}
           </ul>
         </Box>
       </Container>
-      <ToastContainer
-        position="top-right"
-        autoClose={500}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-        theme="light"
-      />
     </>
   );
 };

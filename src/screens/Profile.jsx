@@ -5,9 +5,10 @@ import {
   Typography,
   ButtonGroup,
   IconButton,
+  Modal,
 } from "@mui/material";
 import { red } from "@mui/material/colors";
-import React from "react";
+import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import CreatePost from "../Components/CreatePost";
 import { ToastContainer } from "react-toastify";
@@ -16,7 +17,20 @@ import CameraIcon from "@mui/icons-material/Camera";
 
 const Profile = () => {
   const user = useSelector((state) => state.appReducer.user);
-  console.log("🚀 ~ file: Profile.jsx:8 ~ Profile ~ user:", user);
+  const [picModal, setPicModal] = useState(false);
+
+  const headingstyle = {
+    sm: {
+      textAlign: "center",
+      fontSize: "15px",
+      userSelect: "none",
+    },
+    xs: {
+      textAlign: "center",
+      fontSize: "13px",
+      userSelect: "none",
+    },
+  };
 
   const bgstyle = {
     borderRadius: "16px",
@@ -27,13 +41,40 @@ const Profile = () => {
     padding: "30px 20px",
     display: "flex",
     alignItems: "center",
-    justifyContent: "space-evenly",
+    justifyContent: { xs: "center", sm: " space-evenly" },
     gap: "200",
     flexWrap: "wrap",
     width: "80%",
   };
+
+  const showProfilePic = () => {
+    setPicModal(true);
+  };
   return (
     <>
+      <Modal
+        open={picModal}
+        onClose={() => {
+          setPicModal(false);
+        }}
+        disableAutoFocus={true}
+      >
+        <Box
+          sx={{
+            position: "absolute",
+            top: "50%",
+            left: "50%",
+            transform: "translate(-50%, -50%)",
+          }}
+        >
+          <img
+            src={user?.profile_photo}
+            alt="Profile"
+            width={"300em"}
+            height={"300em"}
+          />
+        </Box>
+      </Modal>
       <Container
         maxWidth="100vw"
         sx={{
@@ -53,24 +94,60 @@ const Profile = () => {
           <img
             src={user.profile_photo}
             alt="profile"
-            width={200}
-            height={200}
-            style={{ borderRadius: "50%", border: "5px solid #1565C0" }}
+            width={180}
+            height={180}
+            style={{
+              borderRadius: "50%",
+              border: "3px solid #1565C0",
+              margin: "10px",
+            }}
+            onClick={showProfilePic}
           />
 
           <Box>
             <Typography
-              textTransform={"uppercase"}
-              fontFamily={"monospace"}
-              fontWeight={"bold"}
-              fontSize={40}
+              sx={{
+                typography: {
+                  sm: {
+                    fontFamily: "Monospace",
+                    textAlign: "left",
+                    fontSize: "40px",
+                    fontWeight: "bold",
+                    userSelect: "none",
+                    textTransform: "uppercase",
+                  },
+                  xs: {
+                    fontFamily: "Monospace",
+                    textAlign: "center",
+                    fontSize: "35px",
+                    fontWeight: "bold",
+                    userSelect: "none",
+                    textTransform: "uppercase",
+                  },
+                },
+              }}
             >
               {user.name}
             </Typography>
             <Typography
-              textTransform={"uppercase"}
-              fontFamily={"monospace"}
-              fontSize={15}
+              sx={{
+                typography: {
+                  sm: {
+                    fontFamily: "Monospace",
+                    textAlign: "left",
+                    fontSize: "15px",
+                    fontWeight: "bold",
+                    userSelect: "none",
+                    textTransform: "uppercase",
+                  },
+                  xs: {
+                    textAlign: "center",
+                    fontSize: "12px",
+                    userSelect: "none",
+                    textTransform: "uppercase",
+                  },
+                },
+              }}
             >
               {user.email}
             </Typography>
@@ -84,38 +161,24 @@ const Profile = () => {
               }}
             >
               <Box>
-                <Typography fontFamily={"monospace"} fontSize={"20px"}>
-                  Posts
-                </Typography>
-                <Typography
-                  fontFamily={"monospace"}
-                  fontSize={"20px"}
-                  textAlign={"center"}
-                >
+                <Typography sx={{ typography: headingstyle }}>Posts</Typography>
+                <Typography sx={{ typography: headingstyle }}>
                   {user?.posts.length}
                 </Typography>
               </Box>
               <Box>
-                <Typography fontFamily={"monospace"} fontSize={"20px"}>
+                <Typography sx={{ typography: headingstyle }}>
                   Followers
                 </Typography>
-                <Typography
-                  fontFamily={"monospace"}
-                  fontSize={"20px"}
-                  textAlign={"center"}
-                >
+                <Typography sx={{ typography: headingstyle }}>
                   {user?.followers.length}
                 </Typography>
               </Box>
               <Box>
-                <Typography fontFamily={"monospace"} fontSize={"20px"}>
+                <Typography sx={{ typography: headingstyle }}>
                   Following
                 </Typography>
-                <Typography
-                  fontFamily={"monospace"}
-                  fontSize={"20px"}
-                  textAlign={"center"}
-                >
+                <Typography sx={{ typography: headingstyle }}>
                   {user?.following.length}
                 </Typography>
               </Box>
@@ -124,7 +187,7 @@ const Profile = () => {
         </Box>
         <Box sx={bgstyle}>
           <CreatePost />
-          <Box>
+          {/* <Box>
             <ButtonGroup variant="outlined" aria-label="outlined button group">
               <Button>Freinds</Button>
               <Button>Setting</Button>
@@ -133,7 +196,7 @@ const Profile = () => {
                 <input type="file" accept="image/*" hidden />
               </Button>{" "}
             </ButtonGroup>
-          </Box>
+          </Box> */}
         </Box>
         <Box
           sx={{
@@ -151,9 +214,6 @@ const Profile = () => {
             width: "80%",
           }}
         >
-          <Typography fontFamily={"monospace"} fontSize={"30px"}>
-            Posts
-          </Typography>
           <Post />
         </Box>
         <ToastContainer

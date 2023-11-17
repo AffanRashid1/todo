@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Box, IconButton, Modal, Typography } from "@mui/material";
+import { Box, Divider, IconButton, Modal, Typography } from "@mui/material";
 import { Link } from "react-router-dom";
 import Button from "@mui/material/Button";
 import styled from "styled-components";
@@ -11,7 +11,7 @@ import LogoutIcon from "@mui/icons-material/Logout";
 import CloseIcon from "@mui/icons-material/Close";
 import { useDispatch } from "react-redux";
 import { setInitialLogged } from "../store/reducer";
-
+import SearchIcon from "@mui/icons-material/Search";
 const Navbar = () => {
   const user = useSelector((state) => state.appReducer.user);
   const isLogged = useSelector((state) => state.appReducer.isLogged);
@@ -94,13 +94,14 @@ const Navbar = () => {
                   </Typography>
                 </Box>
               </Box>
-              <Button
-                size="small"
-                onClick={logoutHandler}
-                sx={{ borderRadius: "20%" }}
-              >
+              <IconButton onClick={logoutHandler}>
                 <LogoutIcon />
-              </Button>
+              </IconButton>
+              <Link to="/search">
+                <IconButton>
+                  <SearchIcon />
+                </IconButton>
+              </Link>
             </>
           ) : (
             <>

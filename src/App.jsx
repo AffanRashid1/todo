@@ -7,6 +7,8 @@ import Loading from "./Components/Loading";
 import { routes } from "./router";
 import Home from "./screens/Home";
 import HOC from "./HOC";
+import { ToastContainer } from "react-toastify";
+import { ThemeProvider, createTheme } from "@mui/material";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -33,33 +35,52 @@ const App = () => {
     DataApi();
   }, []);
 
+  const theme = createTheme({
+    direction: "rtl",
+    // other theme properties
+  });
+
   return (
     <>
       {isLoading ? (
         <Loading />
       ) : (
-        <BrowserRouter>
-          <Routes>
-            <Route path="/" element={<HOC childern={<Home />} />}></Route>
-            <Route path="*" element={<Error />}></Route>
-            {routes.map((e, i) => {
-              return (
-                <Route
-                  path={e.path}
-                  key={i}
-                  element={
-                    <HOC
-                      childern={e.element}
-                      isProtected={e.protected}
-                      isLogged={isLogged}
-                    />
-                  }
-                />
-              );
-            })}
-          </Routes>
-        </BrowserRouter>
+        <ThemeProvider theme={theme}>
+          <BrowserRouter>
+            <Routes>
+              <Route path="/" element={<HOC childern={<Home />} />}></Route>
+              <Route path="*" element={<Error />}></Route>
+              {routes.map((e, i) => {
+                return (
+                  <Route
+                    path={e.path}
+                    key={i}
+                    element={
+                      <HOC
+                        childern={e.element}
+                        isProtected={e.protected}
+                        isLogged={isLogged}
+                      />
+                    }
+                  />
+                );
+              })}
+            </Routes>
+          </BrowserRouter>
+        </ThemeProvider>
       )}
+      <ToastContainer
+        position="bottom-right"
+        autoClose={500}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+      />
     </>
   );
 };

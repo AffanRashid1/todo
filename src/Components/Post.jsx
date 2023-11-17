@@ -15,20 +15,9 @@ import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import DeleteIcon from "@mui/icons-material/Delete";
 
-const Post = ({ post, profile, time, name, id }) => {
+const Post = () => {
   const user = useSelector((state) => state.appReducer.user);
   const [open, setopen] = useState(false);
-  const getRandomColor = () => {
-    const letters = "0123456789ABCDEF";
-    let color = "#";
-    for (let i = 0; i < 6; i++) {
-      color += letters[Math.floor(Math.random() * 16)];
-    }
-    return color;
-  };
-
-  let color1 = getRandomColor();
-  let color2 = getRandomColor();
 
   const DelApiHandler = async (id) => {
     try {
@@ -63,7 +52,15 @@ const Post = ({ post, profile, time, name, id }) => {
                   height={50}
                   style={{ borderRadius: "50%", border: "2px solid #1565C0" }}
                 />
-                <Typography textTransform={"capitalize"} fontSize={"20px"}>
+                <Typography
+                  textTransform={"capitalize"}
+                  sx={{
+                    typography: {
+                      sm: { fontSize: "20px" },
+                      lg: { fontSize: "30px" },
+                    },
+                  }}
+                >
                   {user.name}
                 </Typography>
               </Box>
@@ -83,8 +80,9 @@ const Post = ({ post, profile, time, name, id }) => {
             <Box
               sx={{
                 width: "100%",
-                background: `linear-gradient(${color1},${color2})`,
-                minHeight: "400px",
+                background: `linear-gradient(#0288d1,#42a5f5)`,
+                minHeight: { xs: "250px", sm: "400px" },
+
                 display: "flex",
                 justifyContent: "center",
                 alignItems: "center",
