@@ -5,6 +5,7 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
+import icon from "../assets/icon480.png";
 
 const SignUp = () => {
   const [formDetails, setformDetails] = useState({
@@ -62,24 +63,14 @@ const SignUp = () => {
           sx={{
             height: "100vh",
             display: "flex",
-            flexDirection: "column",
-            justifyContent: "center",
+            flexDirection: { xs: "column", sm: "row" },
+            justifyContent: "space-evenly",
             gap: "40px",
             alignItems: "center",
           }}
         >
           <Box>
-            <Typography
-              sx={{
-                fontFamily: "Monospace",
-                textAlign: "center",
-                fontSize: "3rem",
-                fontWeight: "bold",
-                userSelect: "none",
-              }}
-            >
-              Sign Up
-            </Typography>
+            <img src={icon} width={200} />
           </Box>
           <Box
             sx={{

@@ -3,8 +3,7 @@ import { Box, Divider, IconButton, Modal, Typography } from "@mui/material";
 import { Link } from "react-router-dom";
 import Button from "@mui/material/Button";
 import styled from "styled-components";
-import StickyNote2Icon from "@mui/icons-material/StickyNote2";
-import { toast, ToastContainer } from "react-toastify";
+import { toast } from "react-toastify";
 import axios from "axios";
 import { useSelector } from "react-redux";
 import LogoutIcon from "@mui/icons-material/Logout";
@@ -12,6 +11,8 @@ import CloseIcon from "@mui/icons-material/Close";
 import { useDispatch } from "react-redux";
 import { setInitialLogged } from "../store/reducer";
 import SearchIcon from "@mui/icons-material/Search";
+import icon from "../assets/icon.png";
+
 const Navbar = () => {
   const user = useSelector((state) => state.appReducer.user);
   const isLogged = useSelector((state) => state.appReducer.isLogged);
@@ -34,23 +35,14 @@ const Navbar = () => {
           width: 1,
           display: "flex",
           justifyContent: "space-between",
+          alignItems: "center",
           padding: "20px 0px",
           background: "transparent",
           flexWrap: "wrap",
         }}
       >
         <Box>
-          <Typography
-            sx={{
-              color: "primary.main",
-              fontWeight: "bold",
-              fontSize: "30px",
-              letterSpacing: 4,
-            }}
-          >
-            <StickyNote2Icon sx={{ margin: "0 7px" }} />
-            todo
-          </Typography>
+          <img src={icon} />
         </Box>
         <Box
           sx={{
@@ -125,18 +117,6 @@ const Navbar = () => {
           )}
         </Box>
       </Box>
-      <ToastContainer
-        position="top-right"
-        autoClose={500}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-        theme="dark"
-      />
       <Modal keepMounted open={open} onClose={() => setOpen(false)}>
         <Box
           sx={{
