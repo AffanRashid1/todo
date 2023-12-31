@@ -16,7 +16,6 @@ const baseUrl = `${import.meta.env.VITE_BASE_URL}/todos`;
 
 const Todo = () => {
   const [todoInput, settodoInput] = useState("");
-  // const [searchInput, setsearchInput] = useState("");
   const [todos, setTodos] = useState([]);
   const [isLoading, setisLoading] = useState(true);
 
